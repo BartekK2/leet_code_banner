@@ -40,7 +40,6 @@ app.get('/api/svg/:username', (req, res) => {
       const svg = `
 <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 ${200*scale} ${100*scale}" xml:space="preserve">
-    <rect width="200" height="100" fill="#0d1117"/>
 
 
    <circle fill="none" stroke="#d3e1f9ff" stroke-width="${4.1*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[0]}"
