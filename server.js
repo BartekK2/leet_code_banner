@@ -13,7 +13,8 @@ app.get('/api/svg/:username', (req, res) => {
   
   // Tworzymy "mock" obiektów req i res, żeby wywołać funkcję z leetcode.js
   const mockReq = { params: { id: req.params.username } };
-  
+  const scale = req.query.scale || 1; // domyślnie 1
+
   const mockRes = {
     send: (leetcodeData) => {
 
@@ -24,7 +25,7 @@ app.get('/api/svg/:username', (req, res) => {
       const totalEasy = leetcodeData.totalEasy;
       const mediumSolved = leetcodeData.mediumSolved;
       const totalMedium = leetcodeData.totalMedium;
-      const hardSolved = leetcodeData.easySolved;
+      const hardSolved = leetcodeData.hardSolved;
       const totalHard = leetcodeData.totalHard;
       const today = new Date();
 
@@ -34,28 +35,30 @@ app.get('/api/svg/:username', (req, res) => {
       // zamień na Unix timestamp w sekundach
       const todayTimestamp = Math.floor(today.getTime() / 1000);
 
-      const radiuses=[32,32*0.9,32*0.8];
+      const radiuses=[32*scale,32*0.9*scale,32*0.8*scale];
 
       const svg = `
 <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-  viewBox="0 0 200 100" xml:space="preserve">
+  viewBox="0 0 ${200*scale} ${100*scale}" xml:space="preserve">
+    <rect width="200" height="100" fill="#0d1117"/>
 
-   <circle fill="none" stroke="#f7fff7" stroke-width="4" cx="50" cy="50" r="${radiuses[0]}"
+
+   <circle fill="none" stroke="#d3e1f9ff" stroke-width="${4.1*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[0]}"
           stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
   </circle>
-     <circle fill="none" stroke="#f7fff7" stroke-width="3.5" cx="50" cy="50" r="${radiuses[1]}"
+     <circle fill="none" stroke="#d3e1f9ff" stroke-width="${3.6*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[1]}"
           stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
   </circle>
-     <circle fill="none" stroke="#f7fff7" stroke-width="3" cx="50" cy="50" r="${radiuses[2]}"
+     <circle fill="none" stroke="#d3e1f9ff" stroke-width="${3.1*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[2]}"
           stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
   </circle>
   
-  <circle fill="none" stroke="#4ecdc4" stroke-width="4" cx="50" cy="50" r="${radiuses[0]}"
+  <circle fill="none" stroke="#4ecdc4" stroke-width="${4*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[0]}"
           stroke-dasharray="${circle_circumference(radiuses[0])}" stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
 <animate attributeName="stroke-dashoffset"
 values="${circle_circumference(radiuses[0])}; ${circle_circumference(radiuses[0])*(1-easySolved/totalEasy/2)}; ${circle_circumference(radiuses[0])*(1-easySolved/totalEasy)}"
 keyTimes="0;0.5;1"
@@ -66,9 +69,9 @@ keyTimes="0;0.5;1"
  />
   </circle>
   
-  <circle fill="none" stroke="#1a535c" stroke-width="3.5" cx="50" cy="50" r="${radiuses[1]}"
+  <circle fill="none" stroke="#f58549" stroke-width="${3.5*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[1]}"
           stroke-dasharray="${circle_circumference(radiuses[1])}" stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
 <animate attributeName="stroke-dashoffset"
 values="${circle_circumference(radiuses[1])}; ${circle_circumference(radiuses[1])*(1-mediumSolved/totalMedium/2)}; ${circle_circumference(radiuses[1])*(1-mediumSolved/totalMedium)}"
 keyTimes="0;0.5;1"
@@ -79,9 +82,9 @@ keyTimes="0;0.5;1"
  />
 
   </circle>
-    <circle fill="none" stroke="#ff6b6b" stroke-width="3" cx="50" cy="50" r="${radiuses[2]}"
+    <circle fill="none" stroke="#ff6b6b" stroke-width="${3*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[2]}"
           stroke-dasharray="${circle_circumference(radiuses[2])}" stroke-linecap="round"
-          transform="rotate(-90 50 50)">
+          transform="rotate(-90 ${50*scale} ${50*scale})">
 <animate attributeName="stroke-dashoffset"
 values="${circle_circumference(radiuses[2])}; ${circle_circumference(radiuses[2])*(1-hardSolved/totalHard/2)}; ${circle_circumference(radiuses[2])*(1-hardSolved/totalHard)}"
 keyTimes="0;0.5;1"
@@ -103,18 +106,18 @@ keyTimes="0;0.5;1"
 </style>
                  <path id="path0">
                             <!-- Single line -->
-                                <animate id="d0" attributeName="d" begin="0s;d2.end-1000ms" dur="6000ms" fill="remove" values="m0,50 h0 ; m0,50 h100 ; m0,50 h100 ; m0,50 h0" keyTimes="0;0.7;0.8;1"/>
+                                <animate id="d0" attributeName="d" begin="0s;d2.end-1000ms" dur="6000ms" fill="remove" values="m0,${50*scale} h0 ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h0" keyTimes="0;0.7;0.8;1"/>
                     </path>
-    <text font-family="&quot;Fira Code&quot;, monospace" fill="#4ecdc4" font-size="6" x="50" y="50"  text-anchor="middle"  dominant-baseline="middle" letter-spacing="normal">
+    <text font-family="&quot;Fira Code&quot;, monospace" fill="#4ecdc4" font-size="${6*scale}" x="${50*scale}" y="${50*scale}"  text-anchor="middle"  dominant-baseline="middle" letter-spacing="normal">
         <textPath xlink:href="#path0">
             Easy: ${easySolved}/${totalEasy}
         </textPath>
     </text>
         <path id="path1">
                             <!-- Single line -->
-                                <animate id="d1" attributeName="d" begin="d0.end-1000ms" dur="6000ms" fill="remove" values="m0,50 h0 ; m0,50 h100 ; m0,50 h100 ; m0,50 h0" keyTimes="0;0.66666666666667;0.83333333333333;1"/>
+                                <animate id="d1" attributeName="d" begin="d0.end-1000ms" dur="6000ms" fill="remove" values="m0,${50*scale} h0 ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h0" keyTimes="0;0.66666666666667;0.83333333333333;1"/>
                     </path>
-    <text font-family="&quot;Fira Code&quot;, monospace" fill="#1a535c" font-size="6" x="50" y="50"  text-anchor="middle"  dominant-baseline="middle"  letter-spacing="normal">
+    <text font-family="&quot;Fira Code&quot;, monospace" fill="#f58549" font-size="${6*scale}" x="${50*scale}" y="${50*scale}"  text-anchor="middle"  dominant-baseline="middle"  letter-spacing="normal">
         <textPath xlink:href="#path1">
             Mid: ${mediumSolved}/${totalMedium}
         </textPath>
@@ -123,62 +126,62 @@ keyTimes="0;0.5;1"
 <script xmlns=""/>
         <path id="path2">
                             <!-- Single line -->
-                                <animate id="d2" attributeName="d" begin="d1.end-1000ms" dur="6000ms" fill="remove" values="m0,50 h0 ; m0,50 h100 ; m0,50 h100 ; m0,50 h0" keyTimes="0;0.66666666666667;0.83333333333333;1"/>
+                                <animate id="d2" attributeName="d" begin="d1.end-1000ms" dur="6000ms" fill="remove" values="m0,${50*scale} h0 ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h${100*scale} ; m0,${50*scale} h0" keyTimes="0;0.66666666666667;0.83333333333333;1"/>
                     </path>
-    <text font-family="&quot;Fira Code&quot;, monospace" fill="#ff6b6b" font-size="6" x="50" y="50"  text-anchor="middle"  dominant-baseline="middle"  letter-spacing="normal">
+    <text font-family="&quot;Fira Code&quot;, monospace" fill="#ff6b6b" font-size="${6*scale}" x="${50*scale}" y="${50*scale}"  text-anchor="middle"  dominant-baseline="middle"  letter-spacing="normal">
         <textPath xlink:href="#path2">
             Hard: ${hardSolved}/${totalHard}
         </textPath>
     </text>
 <text 
-    x="${50+radiuses[0]+15}" 
-    y="${30}" 
+    x="${(50+radiuses[0]/scale+15)*scale}" 
+    y="${30*scale}" 
     text-anchor="start" 
     dominant-baseline="middle" 
     font-family="&quot;Fira Code&quot;, monospace"
-    font-size="7" 
-    fill="#1a535c">
+    font-size="${7*scale}" 
+    fill="#4ecdc4">
     LeetCode Stats ✨
   </text>
 <text 
-    x="${50+radiuses[0]+15}" 
-    y="40" 
+    x="${(50+radiuses[0]/scale+15)*scale}" 
+    y="${40*scale}" 
     text-anchor="start" 
     dominant-baseline="middle" 
     font-family="&quot;Fira Code&quot;, monospace"
-    font-size="5" 
-    fill="#1a535c">
+    font-size="${5*scale}" 
+    fill="#4ecdc4">
     Tag: ${mockReq.params.id}
   </text>
   <text 
-    x="${50+radiuses[0]+15}" 
-    y="50" 
+    x="${(50+radiuses[0]/scale+15)*scale}" 
+    y="${50*scale}" 
     text-anchor="start" 
     dominant-baseline="middle" 
     font-family="&quot;Fira Code&quot;, monospace"
-    font-size="5" 
-    fill="#1a535c">
+    font-size="${5*scale}" 
+    fill="#4ecdc4">
     Started at: Oct. 2025
   </text>
     <text 
-    x="${50+radiuses[0]+15}" 
-    y="60" 
+    x="${(50+radiuses[0]/scale+15)*scale}" 
+    y="${60*scale}" 
     text-anchor="start" 
     dominant-baseline="middle" 
     font-family="&quot;Fira Code&quot;, monospace"
-    font-size="5" 
-    fill="#1a535c">
+    font-size="${5*scale}" 
+    fill="#4ecdc4">
 ${leetcodeData?.submissionCalendar?.[todayTimestamp] != 0 
   ? "Today solved: " + leetcodeData.submissionCalendar[todayTimestamp].toString() 
   : ""}  </text>
   <text 
-    x="100" 
-    y="95" 
+    x="${100*scale}" 
+    y="${95*scale}" 
     text-anchor="middle" 
     dominant-baseline="middle" 
     font-family="&quot;Fira Code&quot;, monospace"
-    font-size="3" 
-    fill="#1a535c">
+    font-size="${3*scale}" 
+    fill="#4ecdc4">
 I made this banner myself using API from Faisal Shohag. The repo is in my profile.    </text>
 
 </svg>
