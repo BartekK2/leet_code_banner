@@ -8,6 +8,7 @@
 ### Dynamiczny banner SVG wyświetlający statystyki użytkownika z LeetCode w formie animowanych okręgów. Projekt pobiera dane z LeetCode API i wizualizuje liczbę rozwiązanych problemów według trudności (easy, medium, hard) oraz dzienną aktywność.
 
 ### Przykład użycia: https://leet-code-banner.vercel.app/api/svg/LEETCODE_USERNAME?scale=(0-1) (scale=1 domyślnie)
+### Lub samodzielny hosting
 
 ### Funkcje:
 
@@ -25,6 +26,8 @@
 
 ### A dynamic SVG banner displaying user statistics from LeetCode in the form of animated circles. The project pulls data from the LeetCode API and visualizes the number of problems solved by difficulty (easy, medium, hard) and daily activity. ### Usage example: https://leet-code-banner.vercel.app/api/svg/LEETCODE_USERNAME?scale=(0-1) (scale=1 default)
 
+### Usage example: https://leet-code-banner.vercel.app/api/svg/LEETCODE_USERNAME?scale=(0-1) (scale=1 by default)
+### Or self-hosting
 
 ### Features:
 
