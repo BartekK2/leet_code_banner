@@ -170,7 +170,7 @@ keyTimes="0;0.5;1"
     font-family="&quot;Fira Code&quot;, monospace"
     font-size="${5*scale}" 
     fill="#4ecdc4">
-${leetcodeData?.submissionCalendar?.[todayTimestamp] != 0 
+${leetcodeData?.submissionCalendar?.[todayTimestamp]
   ? "Today solved: " + leetcodeData.submissionCalendar[todayTimestamp].toString() 
   : ""}  </text>
   <text 
