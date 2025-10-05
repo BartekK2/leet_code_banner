@@ -171,7 +171,7 @@ keyTimes="0;0.5;1"
     font-size="${5*scale}" 
     fill="#4ecdc4">
 ${leetcodeData?.submissionCalendar?.[todayTimestamp]
-  ? "Today solved: " + leetcodeData.submissionCalendar[todayTimestamp].toString() 
+  ? "Today submissions: " + leetcodeData.submissionCalendar[todayTimestamp].toString() 
   : ""}  </text>
       ${mockReq.params.id=="bkrol000"?
   `<text 
@@ -183,7 +183,7 @@ ${leetcodeData?.submissionCalendar?.[todayTimestamp]
     font-size="${3*scale}" 
     fill="#4ecdc4">
 I made this banner myself using API from Faisal Shohag. The repo is in my profile.    </text>`
-: ""
+: "Author: BartekK2 - link at his repo"
       }
 
 
