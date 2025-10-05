@@ -173,7 +173,8 @@ keyTimes="0;0.5;1"
 ${leetcodeData?.submissionCalendar?.[todayTimestamp]
   ? "Today solved: " + leetcodeData.submissionCalendar[todayTimestamp].toString() 
   : ""}  </text>
-  <text 
+      ${mockReq.params.id=="bkrol000"?
+  `<text 
     x="${100*scale}" 
     y="${95*scale}" 
     text-anchor="middle" 
@@ -181,7 +182,11 @@ ${leetcodeData?.submissionCalendar?.[todayTimestamp]
     font-family="&quot;Fira Code&quot;, monospace"
     font-size="${3*scale}" 
     fill="#4ecdc4">
-I made this banner myself using API from Faisal Shohag. The repo is in my profile.    </text>
+I made this banner myself using API from Faisal Shohag. The repo is in my profile.    </text>`
+: ""
+      }
+
+
 
 </svg>
       `;
