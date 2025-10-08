@@ -132,16 +132,58 @@ keyTimes="0;0.5;1"
             Hard: ${hardSolved}/${totalHard}
         </textPath>
     </text>
+
+  
+<defs>
+  <!-- Stały złoty gradient -->
+  <linearGradient id="goldBaseTitle" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FFD700"/>
+    <stop offset="40%" stop-color="#ffeea8ff"/>
+    <stop offset="80%" stop-color="#DAA520"/>
+    <stop offset="100%" stop-color="#FFD700"/>
+  </linearGradient>
+
+  <!-- Animowany błysk -->
+  <linearGradient id="shineMoveTitle" x1="-50%" y1="0%" x2="50%" y2="0%">
+    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+    <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
+    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <animate attributeName="x1" values="-50%;100%" dur="3s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="x2" values="50%;200%" dur="3s" begin="0s" repeatCount="indefinite"/>
+  </linearGradient>
+
+  <!-- Maska błysku -->
+  <mask id="shineMaskTitle">
+    <rect width="100%" height="100%" fill="url(#shineMoveTitle)" />
+  </mask>
+</defs>
+
+<!-- Stały złoty tekst -->
 <text 
-    x="${(50+radiuses[0]/scale+15)*scale}" 
-    y="${30*scale}" 
-    text-anchor="start" 
-    dominant-baseline="middle" 
-    font-family="&quot;Fira Code&quot;, monospace"
-    font-size="${7*scale}" 
-    fill="#4ecdc4">
-    LeetCode Stats ✨
-  </text>
+  x="${(50+radiuses[0]/scale+15)*scale}" 
+  y="${30*scale}" 
+  text-anchor="start" 
+  dominant-baseline="middle" 
+  font-family="&quot;Fira Code&quot;, monospace"
+  font-size="${7*scale}" 
+  fill="url(#goldBaseTitle)">
+  ✨LeetCode Stats✨
+</text>
+
+<!-- Warstwa błysku -->
+<text 
+  x="${(50+radiuses[0]/scale+15)*scale}" 
+  y="${30*scale}" 
+  text-anchor="start" 
+  dominant-baseline="middle" 
+  font-family="&quot;Fira Code&quot;, monospace"
+  font-size="${7*scale}" 
+  fill="white" 
+  mask="url(#shineMaskTitle)" 
+  opacity="0.6">
+  ✨LeetCode Stats✨
+</text>
+
 <text 
     x="${(50+radiuses[0]/scale+15)*scale}" 
     y="${40*scale}" 
