@@ -40,6 +40,8 @@ app.get('/api/svg/:username', (req, res) => {
       const svg = `
 <svg version="1.1" id="circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
   viewBox="0 0 ${200*scale} ${100*scale}" xml:space="preserve">
+<a xlink:href="https://leetcode.com/u/${mockReq.params.id}" target="_blank">
+
 
 
    <circle fill="none" stroke="#d3e1f9ff" stroke-width="${4.1*scale}" cx="${50*scale}" cy="${50*scale}" r="${radiuses[0]}"
@@ -144,13 +146,19 @@ keyTimes="0;0.5;1"
   </linearGradient>
 
   <!-- Animowany błysk -->
-  <linearGradient id="shineMoveTitle" x1="-50%" y1="0%" x2="50%" y2="0%">
-    <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
-    <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
-    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    <animate attributeName="x1" values="-50%;100%" dur="3s" begin="0s" repeatCount="indefinite"/>
-    <animate attributeName="x2" values="50%;200%" dur="3s" begin="0s" repeatCount="indefinite"/>
-  </linearGradient>
+<linearGradient id="shineMoveTitle" x1="-50%" y1="0%" x2="50%" y2="0%">
+  <stop offset="0%" stop-color="#FFD700" stop-opacity="0"/>
+  <stop offset="25%" stop-color="#FFFACD" stop-opacity="0.6"/>
+  <stop offset="50%" stop-color="#FFFFE0" stop-opacity="1"/>
+  <stop offset="75%" stop-color="#FFD700" stop-opacity="0.6"/>
+  <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+  <animate attributeName="x1" values="-50%;100%" dur="3s" begin="0s" repeatCount="indefinite"/>
+  <animate attributeName="x2" values="50%;200%" dur="3s" begin="0s" repeatCount="indefinite"/>
+</linearGradient>
+
+
+
+  
 
   <!-- Maska błysku -->
   <mask id="shineMaskTitle">
@@ -184,7 +192,8 @@ keyTimes="0;0.5;1"
   ✨LeetCode Stats✨
 </text>
 
-<text 
+
+  <text 
     x="${(50+radiuses[0]/scale+15)*scale}" 
     y="${40*scale}" 
     text-anchor="start" 
@@ -194,6 +203,7 @@ keyTimes="0;0.5;1"
     fill="#4ecdc4">
     Tag: ${mockReq.params.id}
   </text>
+
   <text 
     x="${(50+radiuses[0]/scale+15)*scale}" 
     y="${50*scale}" 
@@ -229,6 +239,7 @@ I made this banner myself using API from Faisal Shohag. The repo is in my profil
       }
 
 
+</a>
 
 </svg>
       `;
